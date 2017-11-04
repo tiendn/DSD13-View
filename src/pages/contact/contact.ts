@@ -21,11 +21,13 @@ export class ContactPage {
 		this.chart = Highcharts.chart(this.chartID, {
 			chart: {
         type: 'spline',
+        style: {
+          // fontFamily: 'Signika, serif'
+        },
         animation: Highcharts.svg, // don't animate in old IE
         marginRight: 10,
         events: {
             load: function () {
-
                 // set up the updating of the chart each second
                 var series = this.series[0];
                 setInterval(function () {
@@ -37,26 +39,34 @@ export class ContactPage {
         }
       },
       title: {
-          text: 'Live random data'
+          text: 'Eps of each client'
       },
+      subtitle: {
+				text: ''
+			},
       xAxis: {
           type: 'datetime',
-          tickPixelInterval: 150
+          tickPixelInterval: 250
       },
       yAxis: {
           title: {
-              text: 'Value'
+              text: ''
           },
           plotLines: [{
               value: 0,
               width: 1,
               color: '#808080'
-          }]
+          }],
+          labels: {
+            formatter: function() {
+              return `${this.value} Eps`
+            }
+          }
       },
       tooltip: {
           formatter: function () {
               return '<b>' + this.series.name + '</b><br/>' +
-                  Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                  Highcharts.dateFormat('%H:%M:%S', this.x) + '<br/>' +
                   Highcharts.numberFormat(this.y, 2);
           }
       },
@@ -77,6 +87,20 @@ export class ContactPage {
               return data;
           }())
       }],
+      plotOptions: {
+				spline: {
+					marker: {
+						enabled: false,
+						symbol: 'circle',
+						radius: 2,
+						states: {
+							hover: {
+								enabled: true
+							}
+						}
+					}
+				},
+			},
       exporting: {
         enabled: false
       },
@@ -88,7 +112,7 @@ export class ContactPage {
       },
       credits: {
           enabled: false
-      }
+      },
 		});
 	}
 

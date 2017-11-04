@@ -58,16 +58,16 @@ export class HomePage {
 			},
 			yAxis: {
 				title: {
-					text: 'Nuclear weapon states'
+					text: ''
 				},
 				labels: {
 					formatter: function () {
-						return this.value / 1000 + 'k';
+						return this.value;
 					}
 				}
 			},
 			tooltip: {
-				pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+				pointFormat: 'Have <b>{point.y:,.0f}</b> {series.name} domains now'
 			},
 			plotOptions: {
 				area: {
