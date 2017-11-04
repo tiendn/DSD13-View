@@ -1,38 +1,24 @@
-import { ChartService } from './../../providers/chart-service';
-import { Component } from "@angular/core";
-import { NavController, Platform } from "ionic-angular";
-import Highcharts from 'highcharts';
-// declare var Highcharts: any;
-// declare var require: any;
-// let HighCharts = require('highcharts');
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 
+/*
+  Generated class for the ServerTech page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
-  selector: "page-home",
-  templateUrl: "home.html",
-  providers: [ChartService]
+  selector: 'page-server-tech',
+  templateUrl: 'server-tech.html'
 })
+export class ServerTechPage {
+  chartID: string;
+  chart: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.chartID = "server-tech-chart";
+  }
 
-// const CHART_TYPE = {
-//     "CHART1": "HTTP/HTTPS" , // Number of percentage between HTTP and HTTPS
-//     "CHART2": "HEADER_CODE", // Header code response: 2xx,3xx,4xx,5xx
-//     "CHART3": "EPS", // Number of eps by each client
-//     "CHART4": "SERVER_TECHNOLOGIES" // PHP, JAVA, .NET, NodeJS, Python
-// }
-
-export class HomePage {
-	chart: any;
-	chartID: any;
-	isApp: boolean;
-	constructor(public navCtrl: NavController, public platform: Platform, public chartService: ChartService) {
-		// console.log(Highcharts); 
-		// console.log(this.navCtrl.id);
-		// this.type = ''
-		// enum 
-		this.chartID = "http-https-chart";
-		this.isApp = true; // !this.platform.is("mobileweb");
-	}
-
-	ionViewDidLoad() {
+  ionViewDidLoad() {
 		this.initChart();
 		this.initSocket();
 	}
@@ -43,10 +29,11 @@ export class HomePage {
 				type: 'area'
 			},
 			title: {
-				text: 'HTTP and HTTPS'
+				text: 'US and USSR nuclear stockpiles'
 			},
 			subtitle: {
-				text: ''
+				text: 'Source: <a href="http://thebulletin.metapress.com/content/c4120650912x74k7/fulltext.pdf">' +
+					'thebulletin.metapress.com</a>'
 			},
 			xAxis: {
 				allowDecimals: false,
@@ -84,21 +71,20 @@ export class HomePage {
 					}
 				},
 				series: {
-                    marker: {
-                        enabled: false
-                    }
-                }
+          marker: {
+              enabled: false
+          }
+        }
 			},
-            marker: {
-                enabled: false,
-
-            },
-            legend: {
-                enabled: false
-            },
-            credits: {
-                enabled: false
-            },
+      marker: {
+          enabled: false,
+      },
+      legend: {
+          enabled: false
+      },
+      credits: {
+          enabled: false
+      },
 			series: [{
 				name: 'USA',
 				data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
@@ -122,6 +108,8 @@ export class HomePage {
 	}
 
 	initSocket() {
-		this.chartService.subscribe();		
+		// this.chartService.subscribe();		
 	}
+
+
 }

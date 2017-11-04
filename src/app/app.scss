@@ -14,3 +14,24 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.title-ios {
+    background-color: rgb(45, 88, 206);
+    .toolbar-title {
+        color: rgb(245, 241, 241);
+    }
+}
+
+.scroll-content {
+    margin-top: 30px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.chart-container {
+    width: 100%;
+    height: 450px;
+    // margin-left: 2%;
+    // margin-right: 2%;
+    direction : ltr;
+    margin-top: 30px;
+}
