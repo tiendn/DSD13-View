@@ -74,7 +74,7 @@ export class ContactPage {
 			},
 			tooltip: {
 				formatter: function () {
-					return '<span style="color:' + this.series.color + '; fontWeight: "bold";">' + this.series.name + '</span><br/>' +
+					return '<span style="color:' + this.series.color + '; font-weight: bold;">' + this.series.name + '</span><br/>' +
 						'<b>Time</b>: ' + Highcharts.dateFormat('%H:%M:%S', this.x) + '<br/>' +
 						'<b>Eps</b>: ' + Highcharts.numberFormat(this.y, 0);
 				}
@@ -171,7 +171,7 @@ export class ContactPage {
 		} else {
 			this.chart.addSeries({
 				id: id,
-				name: name,
+				name: id,
 				data: [{
 					x: x,
 					y: value

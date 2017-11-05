@@ -75,9 +75,9 @@ export class AboutPage {
                         symbol: 'circle',
                         radius: 2,
                         states: {
-                        hover: {
-                            enabled: true
-                        }
+                            hover: {
+                                enabled: true
+                            }
                         }
                     },
                 }
@@ -88,22 +88,26 @@ export class AboutPage {
                     data: [{ x: new Date().getTime(), y: 0}]
                 },
                 {
-                    name: '200',
+                    name: '2xx',
                     data: [{ x: new Date().getTime(), y: 0}]
                 },
                 {
-                    name: '2xx',
-                    data: [{ x: new Date().getTime(), y: 0}]
-                }, {
-                    name: '3xx',
-                    data: [{ x: new Date().getTime(), y: 0}]
-                }, {
-                    name: '4xx',
-                    data: [{ x: new Date().getTime(), y: 0}]
-                }, {
                     name: '5xx',
                     data: [{ x: new Date().getTime(), y: 0}]
-                }
+                },
+                {
+                    name: '4xx',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }, 
+                {
+                    name: '3xx',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                },
+                {
+                    name: '200',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }, 
+                
             ],
             credits: {
                 enabled: false
@@ -141,11 +145,11 @@ export class AboutPage {
 		// 	y: value
 		// })
 		this.chart.series[0].addPoint([x, countLess200], true, false);
-        this.chart.series[1].addPoint([x, count200], true, false);
-        this.chart.series[2].addPoint([x, countGreater200], true, false);
-        this.chart.series[3].addPoint([x, countGreater300], true, false);
-        this.chart.series[4].addPoint([x, countGreater400], true, false);
-        this.chart.series[5].addPoint([x, countGreater500], true, false);
+        this.chart.series[1].addPoint([x, countGreater200], true, false);
+        this.chart.series[2].addPoint([x, countGreater500], true, false);
+        this.chart.series[3].addPoint([x, countGreater400], true, false);
+        this.chart.series[4].addPoint([x, countGreater300], true, false);
+        this.chart.series[5].addPoint([x, count200], true, false);
 		// const serie = this.chart.series[0];
 		// console.log(serie)
 		// if (serie) {

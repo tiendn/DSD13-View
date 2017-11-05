@@ -82,19 +82,36 @@ export class ServerTechPage {
                 },
                 }
             },
-            series: [{
-                name: 'PHP',
-                data: [{ x: new Date().getTime(), y: 0}]
-            }, {
-                name: 'JAVA',
-                data: [{ x: new Date().getTime(), y: 0}]
-            }, {
-                name: '.NET',
-                data: [{ x: new Date().getTime(), y: 0}]
-            }, {
-                name: 'NodeJS',
-                data: [{ x: new Date().getTime(), y: 0}]
-            }],
+            series: [
+                {
+                    name: '.Net',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }, 
+                {
+                    name: 'PHP',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }, 
+                {
+                    name: 'Express',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }, 
+                {
+                    name: 'Servlet',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }, 
+                {
+                    name: 'Jsp',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                },
+                {
+                    name: 'Django',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                },
+                {
+                    name: 'Others',
+                    data: [{ x: new Date().getTime(), y: 0}]
+                }
+            ],
             credits: {
                 enabled: false
             },
@@ -124,14 +141,20 @@ export class ServerTechPage {
 	addChartSeries(data) {
 		// this.helper.addChartSeries(this.chart, id, name, data,);
 		// const data = [];
-		const { httpCount, httpsCount } = data;
+		const { countAspDotNet, countPhp, countExpress, countServlet, countJsp, countDjango, countOther } = data;
 		const x = (new Date()).getTime();
 		// data.push({
 		// 	x: x,
 		// 	y: value
 		// })
-		this.chart.series[0].addPoint([x, httpCount], true, false);
-		this.chart.series[1].addPoint([x, httpsCount], true, false);
+		this.chart.series[0].addPoint([x, countAspDotNet], true, false);
+        this.chart.series[1].addPoint([x, countPhp], true, false);
+        this.chart.series[2].addPoint([x, countExpress], true, false);
+        this.chart.series[3].addPoint([x, countServlet], true, false);
+        this.chart.series[4].addPoint([x, countJsp], true, false);
+        this.chart.series[5].addPoint([x, countDjango], true, false);
+        this.chart.series[6].addPoint([x, countOther], true, false);
+
 		// const serie = this.chart.series[0];
 		// console.log(serie)
 		// if (serie) {
