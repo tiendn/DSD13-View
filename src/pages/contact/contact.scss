@@ -1,5 +1,24 @@
 page-contact {
-    #head-code-chart {
-        margin-top: 20px;
+    // #head-code-chart {
+    //     margin-top: 20px;
+    // }
+    .eps-minmax {
+        background-color: white;
+        height: 100%;
+        padding: 5 20;
+        display: flex;
+        flex-direction: 'row';
+        .min {
+            flex: 1;
+            color: red;
+            text-align: right;
+            padding-right: 5px;
+        }
+        .max {
+            flex: 1;
+            color: green;
+            text-align: left;
+            padding-left: 5px;
+        }
     }
 }

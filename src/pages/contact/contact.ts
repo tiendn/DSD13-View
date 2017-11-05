@@ -12,6 +12,8 @@ import { NavController } from "ionic-angular";
 export class ContactPage {
 	chartID: string;
 	chart: any;
+	min: number = 99999;
+	max: number = -1;
 	// count: number = 1;
 	constructor(public navCtrl: NavController, private helper: Helper, public service: ChartService) {
 		this.chartID = "eps-chart";
@@ -151,6 +153,8 @@ export class ContactPage {
 	addChartSeries(address, port, value) {
 		// this.helper.addChartSeries(this.chart, id, name, data,);
 		// const data = [];
+		this.min = value > 0 ? this.min <= value ? this.min : value : this.min;
+		this.max = this.max <= value ? value : this.max;
 		const x = (new Date()).getTime();
 		const id = `${address}:${port}`;
 		// data.push({
