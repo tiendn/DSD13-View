@@ -56105,6 +56105,8 @@ var ContactPage = (function () {
         this.navCtrl = navCtrl;
         this.helper = helper;
         this.service = service;
+        this.min = 99999;
+        this.max = -1;
         this.chartID = "eps-chart";
     }
     ContactPage.prototype.ionViewDidLoad = function () {
@@ -56208,6 +56210,8 @@ var ContactPage = (function () {
     ContactPage.prototype.addChartSeries = function (address, port, value) {
         // this.helper.addChartSeries(this.chart, id, name, data,);
         // const data = [];
+        this.min = value > 0 ? this.min <= value ? this.min : value : this.min;
+        this.max = this.max <= value ? value : this.max;
         var x = (new Date()).getTime();
         var id = address + ":" + port;
         // data.push({
@@ -56244,7 +56248,7 @@ var ContactPage = (function () {
     };
     ContactPage = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["z" /* Component */])({
-            selector: "page-contact",template:/*ion-inline-start:"/Users/monkey/Documents/Github/DSD13-View/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Chart 03\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div [id] = "chartID" class="chart-container">\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/monkey/Documents/Github/DSD13-View/src/pages/contact/contact.html"*/,
+            selector: "page-contact",template:/*ion-inline-start:"/Users/monkey/Documents/Github/DSD13-View/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Chart 03\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div [id] = "chartID" class="chart-container">\n    </div>\n    <div class = "eps-minmax">\n      <span class="min">Min: {{min}}</span>\n      <span class="max">Max: {{max}}</span>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/monkey/Documents/Github/DSD13-View/src/pages/contact/contact.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_0__providers_chart_service__["a" /* ChartService */]]
         }), 
         __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__commons_helper__["a" /* Helper */], __WEBPACK_IMPORTED_MODULE_0__providers_chart_service__["a" /* ChartService */]])
@@ -80868,7 +80872,7 @@ var MyApp = (function () {
     function MyApp(platform) {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_2__pages_tabs_tabs__["a" /* TabsPage */];
         platform.ready().then(function () {
-            console.log(platform.getPlatformConfig);
+            console.log(platform.is("ios"));
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             // statusBar.styleDefault();
@@ -80878,9 +80882,10 @@ var MyApp = (function () {
     MyApp = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Component */])({template:/*ion-inline-start:"/Users/monkey/Documents/Github/DSD13-View/src/app/app.html"*/'<ion-nav [root]="rootPage" swipeBackEnabled="true"></ion-nav>\n'/*ion-inline-end:"/Users/monkey/Documents/Github/DSD13-View/src/app/app.html"*/
         }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]) === 'function' && _a) || Object])
     ], MyApp);
     return MyApp;
+    var _a;
 }());
 //# sourceMappingURL=app.component.js.map
 

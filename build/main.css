@@ -21292,6 +21292,32 @@ sub {
   direction: ltr;
 }
 
-page-contact #head-code-chart {
-  margin-top: 20px;
+page-contact .eps-minmax {
+  background-color: white;
+  height: 100%;
+  padding: 5 20;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: 'row';
+  -ms-flex-direction: 'row';
+  flex-direction: 'row';
+}
+
+page-contact .eps-minmax .min {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  color: red;
+  text-align: right;
+  padding-right: 5px;
+}
+
+page-contact .eps-minmax .max {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  color: green;
+  text-align: left;
+  padding-left: 5px;
 }
