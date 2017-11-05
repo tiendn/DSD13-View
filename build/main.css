@@ -21281,7 +21281,6 @@ sub {
 }
 
 .scroll-content {
-  margin-top: 20px;
   background-color: #e0e3e4;
   padding-left: 0 !important;
   padding-right: 0 !important;

@@ -55979,22 +55979,25 @@ var AboutPage = (function () {
                     data: [{ x: new Date().getTime(), y: 0 }]
                 },
                 {
-                    name: '200',
+                    name: '2xx',
                     data: [{ x: new Date().getTime(), y: 0 }]
                 },
                 {
-                    name: '2xx',
-                    data: [{ x: new Date().getTime(), y: 0 }]
-                }, {
-                    name: '3xx',
-                    data: [{ x: new Date().getTime(), y: 0 }]
-                }, {
-                    name: '4xx',
-                    data: [{ x: new Date().getTime(), y: 0 }]
-                }, {
                     name: '5xx',
                     data: [{ x: new Date().getTime(), y: 0 }]
-                }
+                },
+                {
+                    name: '4xx',
+                    data: [{ x: new Date().getTime(), y: 0 }]
+                },
+                {
+                    name: '3xx',
+                    data: [{ x: new Date().getTime(), y: 0 }]
+                },
+                {
+                    name: '200',
+                    data: [{ x: new Date().getTime(), y: 0 }]
+                },
             ],
             credits: {
                 enabled: false
@@ -56030,11 +56033,11 @@ var AboutPage = (function () {
         // 	y: value
         // })
         this.chart.series[0].addPoint([x, countLess200], true, false);
-        this.chart.series[1].addPoint([x, count200], true, false);
-        this.chart.series[2].addPoint([x, countGreater200], true, false);
-        this.chart.series[3].addPoint([x, countGreater300], true, false);
-        this.chart.series[4].addPoint([x, countGreater400], true, false);
-        this.chart.series[5].addPoint([x, countGreater500], true, false);
+        this.chart.series[1].addPoint([x, countGreater200], true, false);
+        this.chart.series[2].addPoint([x, countGreater500], true, false);
+        this.chart.series[3].addPoint([x, countGreater400], true, false);
+        this.chart.series[4].addPoint([x, countGreater300], true, false);
+        this.chart.series[5].addPoint([x, count200], true, false);
         // const serie = this.chart.series[0];
         // console.log(serie)
         // if (serie) {
@@ -56146,7 +56149,7 @@ var ContactPage = (function () {
             },
             tooltip: {
                 formatter: function () {
-                    return '<span style="color:' + this.series.color + '; fontWeight: "bold";">' + this.series.name + '</span><br/>' +
+                    return '<span style="color:' + this.series.color + '; font-weight: bold;">' + this.series.name + '</span><br/>' +
                         '<b>Time</b>: ' + Highcharts.dateFormat('%H:%M:%S', this.x) + '<br/>' +
                         '<b>Eps</b>: ' + Highcharts.numberFormat(this.y, 0);
                 }
@@ -56226,7 +56229,7 @@ var ContactPage = (function () {
         else {
             this.chart.addSeries({
                 id: id,
-                name: name,
+                name: id,
                 data: [{
                         x: x,
                         y: value
@@ -56244,10 +56247,9 @@ var ContactPage = (function () {
             selector: "page-contact",template:/*ion-inline-start:"/Users/monkey/Documents/Github/DSD13-View/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Chart 03\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div [id] = "chartID" class="chart-container">\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/monkey/Documents/Github/DSD13-View/src/pages/contact/contact.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_0__providers_chart_service__["a" /* ChartService */]]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* NavController */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* NavController */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__commons_helper__["a" /* Helper */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__commons_helper__["a" /* Helper */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_chart_service__["a" /* ChartService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__providers_chart_service__["a" /* ChartService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__commons_helper__["a" /* Helper */], __WEBPACK_IMPORTED_MODULE_0__providers_chart_service__["a" /* ChartService */]])
     ], ContactPage);
     return ContactPage;
-    var _a, _b, _c;
 }());
 //# sourceMappingURL=contact.js.map
 
@@ -56527,19 +56529,36 @@ var ServerTechPage = (function () {
                     },
                 }
             },
-            series: [{
+            series: [
+                {
+                    name: '.Net',
+                    data: [{ x: new Date().getTime(), y: 0 }]
+                },
+                {
                     name: 'PHP',
                     data: [{ x: new Date().getTime(), y: 0 }]
-                }, {
-                    name: 'JAVA',
+                },
+                {
+                    name: 'Express',
                     data: [{ x: new Date().getTime(), y: 0 }]
-                }, {
-                    name: '.NET',
+                },
+                {
+                    name: 'Servlet',
                     data: [{ x: new Date().getTime(), y: 0 }]
-                }, {
-                    name: 'NodeJS',
+                },
+                {
+                    name: 'Jsp',
                     data: [{ x: new Date().getTime(), y: 0 }]
-                }],
+                },
+                {
+                    name: 'Django',
+                    data: [{ x: new Date().getTime(), y: 0 }]
+                },
+                {
+                    name: 'Others',
+                    data: [{ x: new Date().getTime(), y: 0 }]
+                }
+            ],
             credits: {
                 enabled: false
             },
@@ -56567,14 +56586,19 @@ var ServerTechPage = (function () {
     ServerTechPage.prototype.addChartSeries = function (data) {
         // this.helper.addChartSeries(this.chart, id, name, data,);
         // const data = [];
-        var httpCount = data.httpCount, httpsCount = data.httpsCount;
+        var countAspDotNet = data.countAspDotNet, countPhp = data.countPhp, countExpress = data.countExpress, countServlet = data.countServlet, countJsp = data.countJsp, countDjango = data.countDjango, countOther = data.countOther;
         var x = (new Date()).getTime();
         // data.push({
         // 	x: x,
         // 	y: value
         // })
-        this.chart.series[0].addPoint([x, httpCount], true, false);
-        this.chart.series[1].addPoint([x, httpsCount], true, false);
+        this.chart.series[0].addPoint([x, countAspDotNet], true, false);
+        this.chart.series[1].addPoint([x, countPhp], true, false);
+        this.chart.series[2].addPoint([x, countExpress], true, false);
+        this.chart.series[3].addPoint([x, countServlet], true, false);
+        this.chart.series[4].addPoint([x, countJsp], true, false);
+        this.chart.series[5].addPoint([x, countDjango], true, false);
+        this.chart.series[6].addPoint([x, countOther], true, false);
         // const serie = this.chart.series[0];
         // console.log(serie)
         // if (serie) {
@@ -80844,6 +80868,7 @@ var MyApp = (function () {
     function MyApp(platform) {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_2__pages_tabs_tabs__["a" /* TabsPage */];
         platform.ready().then(function () {
+            console.log(platform.getPlatformConfig);
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             // statusBar.styleDefault();
