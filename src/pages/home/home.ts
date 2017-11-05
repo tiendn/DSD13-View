@@ -1,4 +1,5 @@
-import { ChartService } from './../../providers/chart-service';
+import { HttpHttpsService } from './../../providers/http-https-service';
+// import { ChartService } from './../../providers/chart-service';
 import { Component } from "@angular/core";
 import { NavController, Platform } from "ionic-angular";
 import Highcharts from 'highcharts';
@@ -9,7 +10,7 @@ import Highcharts from 'highcharts';
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
-  providers: [ChartService]
+  providers: [HttpHttpsService]
 })
 
 // const CHART_TYPE = {
@@ -23,7 +24,7 @@ export class HomePage {
 	chart: any;
 	chartID: any;
 	isApp: boolean;
-	constructor(public navCtrl: NavController, public platform: Platform, public chartService: ChartService) {
+	constructor(public navCtrl: NavController, public platform: Platform, public service: HttpHttpsService) {
 		// console.log(Highcharts); 
 		// console.log(this.navCtrl.id);
 		// this.type = ''
@@ -34,7 +35,7 @@ export class HomePage {
 
 	ionViewDidLoad() {
 		this.initChart();
-		this.initSocket();
+		// this.initSocket();
 	}
 
 	initChart() {
@@ -71,7 +72,7 @@ export class HomePage {
 			},
 			plotOptions: {
 				area: {
-					pointStart: 1940,
+					// pointStart: new Date(),
 					marker: {
 						enabled: false,
 						symbol: 'circle',
@@ -100,7 +101,7 @@ export class HomePage {
                 enabled: false
             },
 			series: [{
-				name: 'USA',
+				name: 'HTTP',
 				data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
 					1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
 					27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
@@ -109,7 +110,7 @@ export class HomePage {
 					22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
 					10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
 			}, {
-				name: 'USSR/Russia',
+				name: 'HTTPS',
 				data: [null, null, null, null, null, null, null, null, null, null,
 					5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
 					4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
@@ -121,7 +122,7 @@ export class HomePage {
 		});
 	}
 
-	initSocket() {
-		this.chartService.subscribe();		
-	}
+	// initSocket() {
+	// 	this.chartService.subscribe();		
+	// }
 }

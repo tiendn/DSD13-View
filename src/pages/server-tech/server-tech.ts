@@ -1,3 +1,4 @@
+import { ServerTechService } from './../../providers/server-tech-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -9,18 +10,19 @@ import { NavController, NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-server-tech',
-  templateUrl: 'server-tech.html'
+  templateUrl: 'server-tech.html',
+  providers: [ServerTechService]
 })
 export class ServerTechPage {
   chartID: string;
   chart: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public service: ServerTechService) {
     this.chartID = "server-tech-chart";
   }
 
   ionViewDidLoad() {
 		this.initChart();
-		this.initSocket();
+		// this.initSocket();
 	}
 
 	initChart() {
@@ -75,16 +77,16 @@ export class ServerTechPage {
         }
       },
       series: [{
-          name: '2xx',
+          name: 'PHP',
           data: [502, 635, 809, 947, 1402, 3634, 5268]
       }, {
-          name: '3xx',
+          name: 'JAVA',
           data: [106, 107, 111, 133, 221, 767, 1766]
       }, {
-          name: '4xx',
+          name: '.NET',
           data: [163, 203, 276, 408, 547, 729, 628]
       }, {
-          name: '5xx',
+          name: 'NodeJS',
           data: [18, 31, 54, 156, 339, 818, 1201]
       }],
       credits: {
@@ -93,9 +95,9 @@ export class ServerTechPage {
 		});
 	}
 
-	initSocket() {
+	// initSocket() {
 		// this.chartService.subscribe();		
-	}
+	// }
 
 
 }

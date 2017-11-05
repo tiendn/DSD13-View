@@ -1,3 +1,4 @@
+import { Helper } from './../commons/helper';
 import { ServerTechPage } from './../pages/server-tech/server-tech';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,6 +37,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   providers: [
     // StatusBar,
     // SplashScreen,
+    Helper,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

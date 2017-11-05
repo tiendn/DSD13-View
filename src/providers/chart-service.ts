@@ -1,9 +1,9 @@
-// import { WebsocketService } from './websocket';
-import {$WebSocket, WebSocketSendMode} from 'angular2-websocket/angular2-websocket';
-import { Observable, Subject } from 'rxjs/Rx';
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/timeout";
+import "rxjs/add/operator/retry";
+
 /*
   Generated class for the ChartService provider.
 
@@ -12,87 +12,52 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class ChartService {
-    // ws: $WebSocket;
-    ws: WebSocket;
-    counter: number;
-    url: string;
-    public messages: Subject<any>;
+	constructor(public http: Http) {
+		console.log("Hello ChartService Provider");
+	}
 
-    private websocket: WebSocket;
-    
-    
-    
-    constructor(public http: Http) {
-        console.log('Hello ChartService Provider');
-        this.url = "ws://192.168.1.78:8080/display/add";
-        // this.url = "ws://demos.kaazing.com/echo"; 
-        // this.ws = new $WebSocket(this.url);
-        this.ws = new WebSocket(this.url);
-    }
+	fetchData(url) {
+		return new Promise((resolve, reject) => {
+			try {
+				this.http.get(url)
+				.timeout(3000)
+				.retry(3)
+				.map(res => res.json())
+				.subscribe(
+					res => {
+						if (res != undefined && res != null) {
+							// console.log(res);
+							resolve(res);
+						}
+						else {
+							resolve(null);
+						}
+					},
+					error => {
+						console.log(error);
+						reject(error);
+					}
+				);
+			} catch (error) {
+				reject(error);
+			}
+		})
+	}
 
-    // sendMessage(text:string){
-    //     this.websocket.send(text);
-    //   }
-  
-    // GetInstanceStatus(): Observable<any>{
-    //     this.websocket = new WebSocket(this.url); //dummy echo websocket service
-    //     this.websocket.onopen =  (evt) => {
-    //         this.websocket.send("Hello World");
-    //     };
-  
-    //     return Observable.create(observer=>{
-    //         this.websocket.onmessage = (evt) => { 
-    //             console.log(evt);
-    //             observer.next(evt);
-    //         };
-    //     })
-    //     .map(res=> "From WS: " + res.data)
-    //     .share();
-    // }
+	fetchHttpData() {
+		return this.fetchData("http://192.168.1.78:8080/display/");
+	}
 
-    subscribe() {
-        this.ws = new WebSocket(this.url);
-        console.log(this.ws)
-        // this.ws.
-        this.ws.onopen = (event) => {
-            console.log("Open");
-            const obj = {
-                num1: 3,
-                num2: 4
-            }
-            this.ws.send(obj);
-            this.ws.send("Here's some text that the server is urgently awaiting!"); 
-        };
-    
-        this.ws.onmessage = (event) => {
-            console.log(event);
-          }
-    
-        this.ws.onerror = error => {
-            console.log(error);
-        };
+	fetchHeadCodeData() {
+		return this.fetchData("http://192.168.1.78:8080/display/");
+	}
 
-        // console.log("trying to subscribe to ws");
-        // this.ws = new $WebSocket(this.url);
-        // this.ws.send("Hello");
-        // this.ws.getDataStream().subscribe(
-        //     res => {
-        //         console.log(res)
-        //         var count = JSON.parse(res.data).value;
-        //         console.log('Got: ' + count);
-        //         this.counter = count;
-        //     },
-        //     function(e) { console.log('Error: ' + e.message); },
-        //     function() { console.log('Completed'); }
-        // );
-        
-    }
-          
+	fetchEpsData() {
+		return this.fetchData("http://192.168.1.78:8080/display/epsstatisical");
+	}
 
-    close() {
-        this.ws.close(404, 'Close');    // close immediately
-    }
 
-  
-
+	fetchServerData() {
+		return this.fetchData("http://192.168.1.78:8080/display/");
+	}
 }

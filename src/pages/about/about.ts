@@ -1,22 +1,29 @@
+import { HeadCodeService } from './../../providers/head-code-service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html'
+  templateUrl: 'about.html',
+  providers: [HeadCodeService]
 })
 export class AboutPage {
 
   chartID: string;
   chart: any;
-  constructor(public navCtrl: NavController) {
-    this.chartID =  "eps-chart";
+  constructor(public navCtrl: NavController, public service: HeadCodeService) {
+    this.chartID =  "head-code-chart";
   }
 
   ionViewDidLoad() {
-		this.initChart();
-		this.initSocket();
-	}
+    this.fetchData();
+	this.initChart();
+		// this.initSocket();
+  }
+  
+  fetchData() {
+	// this.service.fetchData();
+  }
 
 	initChart() {
 		this.chart = Highcharts.chart(this.chartID, {
@@ -88,8 +95,8 @@ export class AboutPage {
 		});
 	}
 
-	initSocket() {
+	// initSocket() {
 		// this.chartService.subscribe();		
-	}
+	// }
 
 }
