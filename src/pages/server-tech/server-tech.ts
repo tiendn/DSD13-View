@@ -1,4 +1,5 @@
-import { ServerTechService } from './../../providers/server-tech-service';
+import { ChartService } from './../../providers/chart-service';
+// import { ServerTechService } from './../../providers/server-tech-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -11,12 +12,12 @@ import { NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-server-tech',
   templateUrl: 'server-tech.html',
-  providers: [ServerTechService]
+  providers: [ChartService]
 })
 export class ServerTechPage {
   chartID: string;
   chart: any;
-  constructor(public navCtrl: NavController, public service: ServerTechService) {
+  constructor(public navCtrl: NavController, public service: ChartService) {
     this.chartID = "server-tech-chart";
   }
 
@@ -28,71 +29,135 @@ export class ServerTechPage {
 	initChart() {
 		this.chart = Highcharts.chart(this.chartID, {
 			chart: {
-        type: 'area'
-      },
-      title: {
-          text: 'Server languages'
-      },
-      // subtitle: {
-      //     text: 'Source: Wikipedia.org'
-      // },
-      xAxis: {
-          // categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
-          tickmarkPlacement: 'on',
-          title: {
-              enabled: false
-          }
-      },
-      yAxis: {
-          title: {
-              enabled: false,
-          },
-          labels: {
-            formatter: function () {
-                return `${this.value}%`
+                type: 'area'
             },
-        }
-      },
-      tooltip: {
-          pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b>)<br/>', //  ({point.y:,.0f}
-          split: true
-      },
-      plotOptions: {
-        area: {
-          stacking: 'percent',
-          lineColor: '#ffffff',
-          lineWidth: 1,
-          marker: {
-              lineWidth: 1,
-              lineColor: '#ffffff',
-              enabled: false,
-              symbol: 'circle',
-              radius: 2,
-              states: {
-                hover: {
-                  enabled: true
+            title: {
+                text: 'Server languages'
+            },
+            subtitle: {
+                text: 'DSD13'
+            },
+            xAxis: {
+                // categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+                tickmarkPlacement: 'on',
+                title: {
+                    enabled: false
+                },
+                type: 'datetime',
+				dateTimeLabelFormats: {
+					millisecond: '%H:%M:%S'
+				},
+				tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    enabled: false,
+                },
+                labels: {
+                    formatter: function () {
+                        return `${this.value}%`
+                    },
                 }
-              }
-          },
-        }
-      },
-      series: [{
-          name: 'PHP',
-          data: [502, 635, 809, 947, 1402, 3634, 5268]
-      }, {
-          name: 'JAVA',
-          data: [106, 107, 111, 133, 221, 767, 1766]
-      }, {
-          name: '.NET',
-          data: [163, 203, 276, 408, 547, 729, 628]
-      }, {
-          name: 'NodeJS',
-          data: [18, 31, 54, 156, 339, 818, 1201]
-      }],
-      credits: {
-          enabled: false
-      },
-		});
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b><br/>', //  ({point.y:,.0f}
+                split: true
+            },
+            plotOptions: {
+                area: {
+                stacking: 'percent',
+                lineColor: '#ffffff',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#ffffff',
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                        enabled: true
+                        }
+                    }
+                },
+                }
+            },
+            series: [{
+                name: 'PHP',
+                data: [{ x: new Date().getTime(), y: 0}]
+            }, {
+                name: 'JAVA',
+                data: [{ x: new Date().getTime(), y: 0}]
+            }, {
+                name: '.NET',
+                data: [{ x: new Date().getTime(), y: 0}]
+            }, {
+                name: 'NodeJS',
+                data: [{ x: new Date().getTime(), y: 0}]
+            }],
+            credits: {
+                enabled: false
+            },
+        });
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+        this.fetchData();
+    }
+    
+    fetchData() {
+		const interval = setInterval(() => {
+			this.service.fetchServerData().then((data: Array<Object>) => {
+				if (data) {
+					this.addChartSeries(data);
+				}
+			});
+		}, 1000);
+		// setTimeout(() => {
+		// 	clearInterval(interval);
+		// }, 5000)
+	}
+
+
+	addChartSeries(data) {
+		// this.helper.addChartSeries(this.chart, id, name, data,);
+		// const data = [];
+		const { httpCount, httpsCount } = data;
+		const x = (new Date()).getTime();
+		// data.push({
+		// 	x: x,
+		// 	y: value
+		// })
+		this.chart.series[0].addPoint([x, httpCount], true, false);
+		this.chart.series[1].addPoint([x, httpsCount], true, false);
+		// const serie = this.chart.series[0];
+		// console.log(serie)
+		// if (serie) {
+			// if (serie.data.length % 5 === 0) {
+			// 	// this.count--;
+			// 	serie.addPoint([x, value], true, true);
+			// }
+			// else {
+			// 	// this.count++;
+			// 	serie.addPoint([x, value], true, false);
+			// }
+		// } else {
+			// this.chart.addSeries({
+			// 	id: id,
+			// 	name: name,
+			// 	data: [{
+			// 		x: x,
+			// 		y: value
+			// 	}],
+			// 	lineWidth: 1,
+			// 	marker: {
+			// 		symbol: 'circle',
+			// 		radius: 1
+			// 	}
+			// }, true, true);
+		// }
 	}
 
 	// initSocket() {

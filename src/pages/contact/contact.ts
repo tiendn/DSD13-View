@@ -12,7 +12,7 @@ import { NavController } from "ionic-angular";
 export class ContactPage {
 	chartID: string;
 	chart: any;
-	count: number = 0;
+	// count: number = 1;
 	constructor(public navCtrl: NavController, private helper: Helper, public service: ChartService) {
 		this.chartID = "eps-chart";
 	}
@@ -20,22 +20,6 @@ export class ContactPage {
 	ionViewDidLoad() {
 		this.initChart();
 		// this.initSocket();
-	}
-  
-	fetchData() {
-		const interval = setInterval(() => {
-			this.service.fetchEpsData().then((data: Array<Object>) => {
-				if (data) {
-					data.forEach(element => {
-						// this.addChartSeries(element["clientAddress"], element["clientAddress"], element["eps"]);
-						this.addChartSeries(element["clientAddress"], element["clientAddress"], Math.random());
-					});
-				}
-			});
-		}, 1000);
-		// setTimeout(() => {
-		// 	clearInterval(interval);
-		// }, 5000)
 	}
 
 	initChart() {
@@ -64,7 +48,7 @@ export class ContactPage {
 				text: 'Eps of each client'
 			},
 			subtitle: {
-				text: ''
+				text: 'DSD13'
 			},
 			xAxis: {
 				type: 'datetime',
@@ -90,9 +74,9 @@ export class ContactPage {
 			},
 			tooltip: {
 				formatter: function () {
-					return '<b>' + this.series.name + '</b><br/>' +
-						Highcharts.dateFormat('%H:%M:%S', this.x) + '<br/>' +
-						Highcharts.numberFormat(this.y, 2);
+					return '<span style="color:' + this.series.color + '; fontWeight: "bold";">' + this.series.name + '</span><br/>' +
+						'<b>Time</b>: ' + Highcharts.dateFormat('%H:%M:%S', this.x) + '<br/>' +
+						'<b>Eps</b>: ' + Highcharts.numberFormat(this.y, 0);
 				}
 			},
 			plotOptions: {
@@ -147,21 +131,43 @@ export class ContactPage {
 		this.fetchData();
 	}
 
-	addChartSeries(id, name, value) {
+	fetchData() {
+		// const data = [{id: 1}, {id: 2}, {id: 3}]
+		const interval = setInterval(() => {
+			this.service.fetchEpsData().then((data: Array<Object>) => {
+				if (data) {
+					data.forEach(element => {
+						this.addChartSeries(element["clientAddress"], element["clientPort"], element["eps"]);
+						// this.addChartSeries(element["id"], 'fdfs', Math.random());
+					});
+				}
+			});
+		}, 1000);
+		// setTimeout(() => {
+		// 	clearInterval(interval);
+		// }, 5000)
+	}
+
+	addChartSeries(address, port, value) {
 		// this.helper.addChartSeries(this.chart, id, name, data,);
 		// const data = [];
-		this.count++;
 		const x = (new Date()).getTime();
+		const id = `${address}:${port}`;
 		// data.push({
 		// 	x: x,
 		// 	y: value
 		// })
 		const serie = this.chart.get(id);
+		// console.log(serie.data.length)
 		if (serie) {
-			if (this.count % 5 === 0)
+			if (serie.data.length % 7 === 0) {
+				// this.count--;
 				serie.addPoint([x, value], true, true);
-			else 
+			}
+			else {
+				// this.count++;
 				serie.addPoint([x, value], true, false);
+			}
 		} else {
 			this.chart.addSeries({
 				id: id,

@@ -45,11 +45,11 @@ export class ChartService {
 	}
 
 	fetchHttpData() {
-		return this.fetchData("http://192.168.1.78:8080/display/");
+		return this.fetchData("http://192.168.1.78:8080/display/httpstatisical");
 	}
 
 	fetchHeadCodeData() {
-		return this.fetchData("http://192.168.1.78:8080/display/");
+		return this.fetchData("http://192.168.1.78:8080/display/statusstatisical");
 	}
 
 	fetchEpsData() {
@@ -58,6 +58,6 @@ export class ChartService {
 
 
 	fetchServerData() {
-		return this.fetchData("http://192.168.1.78:8080/display/");
+		return this.fetchData("http://192.168.1.78:8080/display/powerbystatisical");
 	}
 }
