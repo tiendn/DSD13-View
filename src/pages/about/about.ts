@@ -1,4 +1,5 @@
-import { ChartService } from './../../providers/chart-service';
+import { Helper } from './../../commons/helper';
+// import { ChartService } from './../../providers/chart-service';
 // import { HeadCodeService } from './../../providers/head-code-service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -6,13 +7,13 @@ import { NavController } from 'ionic-angular';
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
-  providers: [ChartService]
+//   providers: [ChartService]
 })
 export class AboutPage {
 
   chartID: string;
   chart: any;
-  constructor(public navCtrl: NavController, public service: ChartService) {
+  constructor(public navCtrl: NavController, public helper: Helper) {
     this.chartID =  "head-code-chart";
   }
 
@@ -123,7 +124,7 @@ export class AboutPage {
     
     fetchData() {
 		const interval = setInterval(() => {
-			this.service.fetchHeadCodeData().then((data: Array<Object>) => {
+			this.helper.fetchHeadCodeData().then((data: Array<Object>) => {
 				if (data) {
 					this.addChartSeries(data);
 				}

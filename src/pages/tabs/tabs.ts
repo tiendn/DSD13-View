@@ -1,3 +1,4 @@
+// import { ChartService } from './../../providers/chart-service';
 import { ServerTechPage } from './../server-tech/server-tech';
 import { Component } from '@angular/core';
 
@@ -6,7 +7,7 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 
 @Component({
-  templateUrl: 'tabs.html'
+  templateUrl: 'tabs.html',
 })
 export class TabsPage {
 
@@ -16,6 +17,5 @@ export class TabsPage {
   tab4Root = ServerTechPage;
 
   constructor() {
-
   }
 }

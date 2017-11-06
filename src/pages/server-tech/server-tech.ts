@@ -1,4 +1,5 @@
-import { ChartService } from './../../providers/chart-service';
+import { Helper } from './../../commons/helper';
+// import { ChartService } from './../../providers/chart-service';
 // import { ServerTechService } from './../../providers/server-tech-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -12,12 +13,12 @@ import { NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-server-tech',
   templateUrl: 'server-tech.html',
-  providers: [ChartService]
+//   providers: [ChartService]
 })
 export class ServerTechPage {
   chartID: string;
   chart: any;
-  constructor(public navCtrl: NavController, public service: ChartService) {
+  constructor(public navCtrl: NavController, public helper: Helper) {
     this.chartID = "server-tech-chart";
   }
 
@@ -126,7 +127,7 @@ export class ServerTechPage {
     
     fetchData() {
 		const interval = setInterval(() => {
-			this.service.fetchServerData().then((data: Array<Object>) => {
+			this.helper.fetchServerData().then((data: Array<Object>) => {
 				if (data) {
 					this.addChartSeries(data);
 				}

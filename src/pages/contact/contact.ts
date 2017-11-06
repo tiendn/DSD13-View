@@ -1,4 +1,4 @@
-import { ChartService } from './../../providers/chart-service';
+// import { ChartService } from './../../providers/chart-service';
 import { Helper } from './../../commons/helper';
 import { EpsService } from './../../providers/eps-service';
 import { Component } from "@angular/core";
@@ -7,7 +7,7 @@ import { NavController } from "ionic-angular";
 @Component({
   selector: "page-contact",
   templateUrl: "contact.html",
-  providers: [ChartService]
+//   providers: [ChartService]
 })
 export class ContactPage {
 	chartID: string;
@@ -15,7 +15,7 @@ export class ContactPage {
 	min: number = 99999;
 	max: number = -1;
 	// count: number = 1;
-	constructor(public navCtrl: NavController, private helper: Helper, public service: ChartService) {
+	constructor(public navCtrl: NavController, public helper: Helper) {
 		this.chartID = "eps-chart";
 	}
 
@@ -136,7 +136,7 @@ export class ContactPage {
 	fetchData() {
 		// const data = [{id: 1}, {id: 2}, {id: 3}]
 		const interval = setInterval(() => {
-			this.service.fetchEpsData().then((data: Array<Object>) => {
+			this.helper.fetchEpsData().then((data: Array<Object>) => {
 				if (data) {
 					data.forEach(element => {
 						this.addChartSeries(element["clientAddress"], element["clientPort"], element["eps"]);

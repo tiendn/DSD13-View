@@ -1,4 +1,5 @@
-import { Helper } from './../commons/helper';
+import { ChartService } from './../providers/empty/chart-service';
+// import { Helper } from './../commons/helper';
 import { ServerTechPage } from './../pages/server-tech/server-tech';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +9,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { Helper } from '../commons/helper';
 // import { StatusBar } from '@ionic-native/status-bar';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 

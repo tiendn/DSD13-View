@@ -1,41 +1,62 @@
-// import { HttpHttpsService } from './../../providers/http-https-service';
-import { ChartService } from './../../providers/chart-service';
+import { Helper } from './../../commons/helper';
+import { AlertController } from 'ionic-angular';
 import { Component } from "@angular/core";
 import { NavController, Platform } from "ionic-angular";
 import Highcharts from 'highcharts';
-// declare var Highcharts: any;
-// declare var require: any;
-// let HighCharts = require('highcharts');
 
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
-  providers: [ChartService]
 })
 
-// const CHART_TYPE = {
-//     "CHART1": "HTTP/HTTPS" , // Number of percentage between HTTP and HTTPS
-//     "CHART2": "HEADER_CODE", // Header code response: 2xx,3xx,4xx,5xx
-//     "CHART3": "EPS", // Number of eps by each client
-//     "CHART4": "SERVER_TECHNOLOGIES" // PHP, JAVA, .NET, NodeJS, Python
-// }
 
 export class HomePage {
 	chart: any;
 	chartID: any;
 	isApp: boolean;
-	constructor(public navCtrl: NavController, public platform: Platform, public service: ChartService) {
+	constructor(public navCtrl: NavController, public platform: Platform, public helper: Helper, public alertCtrl: AlertController) {
 		// console.log(Highcharts); 
 		// console.log(this.navCtrl.id);
 		// this.type = ''
 		// enum 
 		this.chartID = "http-https-chart";
 		this.isApp = true; // !this.platform.is("mobileweb");
+		this.presentPrompt();
 	}
 
 	ionViewDidLoad() {
-		this.initChart();
 		// this.initSocket();
+	}
+
+	presentPrompt() {
+		let alert = this.alertCtrl.create({
+		  title: 'Server IP Address',
+		  enableBackdropDismiss: false,
+		  inputs: [
+			{
+			  name: 'apiUrl',
+			  placeholder: 'localhost'
+			},
+		  ],
+		  buttons: [
+			{
+			  text: 'Cancel',
+			  role: 'cancel',
+			  handler: data => {
+				console.log('Cancel clicked');
+			  }
+			},
+			{
+			  text: 'OK',
+			  handler: data => {
+				  console.log(data)
+				this.helper.apiUrl = data.apiUrl;
+				this.initChart();
+			  }
+			}
+		  ]
+		});
+		alert.present();
 	}
 
 	initChart() {
@@ -120,7 +141,7 @@ export class HomePage {
 
 	fetchData() {
 		const interval = setInterval(() => {
-			this.service.fetchHttpData().then((data: Array<Object>) => {
+			this.helper.fetchHttpData().then((data: Array<Object>) => {
 				if (data) {
 					this.addChartSeries(data);
 				}
@@ -171,6 +192,6 @@ export class HomePage {
 		// }
 	}
 	// initSocket() {
-	// 	this.chartService.subscribe();		
+	// 	this.charthelper.subscribe();		
 	// }
 }
